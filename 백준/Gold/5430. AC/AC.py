@@ -1,35 +1,36 @@
 from collections import deque
- 
-t = int(input())
- 
-for i in range(t):
-    p = input()
-    n = int(input())
-    arr = input()[1:-1].split(',')
- 
-    queue = deque(arr)
- 
+
+n = int(input())
+
+for _ in range(n):
+    ss = input()
+    N = int(input())
+    q = deque(input()[1:-1].split(','))
+    
     flag = 0
- 
-    if n == 0:
-        queue = []
- 
-    for j in p:
-        if j == 'R':
+    
+    if N == 0:
+        q = []
+
+    for s in ss:
+        if s == 'R':
             flag += 1
-        elif j == 'D':
-            if len(queue) == 0:
-                print("error")
+        elif s == 'D':
+            if len(q) == 0:
+                print('error')
                 break
+
+            if flag % 2 == 1:
+                q.pop()
             else:
-                if flag % 2 == 0:
-                    queue.popleft()
-                else:
-                    queue.pop()
- 
+                q.popleft()
+
     else:
         if flag % 2 == 0:
-            print("[" + ",".join(queue) + "]")
+            print("[" + ",".join(q) + "]")
         else:
-            queue.reverse()
-            print("[" + ",".join(queue) + "]")
+            q.reverse()
+            print("[" + ",".join(q) + "]")
+
+
+
