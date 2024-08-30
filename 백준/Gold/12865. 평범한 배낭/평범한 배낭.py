@@ -1,21 +1,26 @@
+# 12865
+# 평범한 배낭
+
 import sys
 
-input = sys.stdin.readline
-n, k = map(int, input().split())
 items = [[0, 0]]
-d = [[0]*(k+1) for _ in range(n+1)]
+input = sys.stdin.readline
 
-for i in range(n):
-    items.append((list(map(int, input().split()))))
+N, K = map(int, input().split())
 
-for i in range(1, n+1):
-    for j in range(1, k+1):
-        weight = items[i][0]
-        value = items[i][1]
+dp = [[0] * (K+1) for _ in range(N+1)]
 
-        if j < weight:
-            d[i][j] = d[i-1][j]
+for _ in range(N):
+    items.append(list(map(int, input().split())))
+
+for i in range(1, N+1): # item index
+    for j in range(1, K+1):  # weight
+        W = items[i][0]
+        V = items[i][1]
+
+        if j < W:
+            dp[i][j] = dp[i-1][j]
         else:
-            d[i][j] = max(d[i-1][j], d[i-1][j-weight]+value)
+            dp[i][j] = max(dp[i-1][j], dp[i-1][j-W]+V)
 
-print(d[n][k])
+print(dp[N][K])
