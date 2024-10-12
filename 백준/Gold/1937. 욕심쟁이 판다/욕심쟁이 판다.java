@@ -32,7 +32,7 @@ public class Main {
 
     public static int dfs(int x, int y) {
 
-        if (dp[x][y] != 0) {
+        if (dp[x][y] != 0) { // 이미 방문했다면
             return dp[x][y];
         }
 
@@ -45,7 +45,7 @@ public class Main {
             int nx = x + dx[i];
             int ny = y + dy[i];
 
-            if(0 <= nx && nx < N && 0 <= ny && ny < N && !visited[nx][ny]) {
+            if(0 <= nx && nx < N && 0 <= ny && ny < N) {
                 if(forest[nx][ny] > forest[x][y]) {
                     dp[x][y] = Math.max(dp[x][y], dfs(nx, ny)+1);
                 } 
