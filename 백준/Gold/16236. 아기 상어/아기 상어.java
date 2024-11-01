@@ -170,7 +170,18 @@ public class Main {
             return null;
         }
 
-        edibleFishes.sort((p1, p2) -> p1.x == p2.x ? Integer.compare(p1.y, p2.y) : Integer.compare(p1.x, p2.x));
+        Collections.sort(edibleFishes, new Comparator<Point>() {
+            @Override
+            public int compare(Point p1, Point p2) {
+                if (p1.x == p2.x) {
+                    // x좌표가 같으면 y좌표로 비교
+                    return Integer.compare(p1.y, p2.y);
+                } else {
+                    // x좌표로 비교
+                    return Integer.compare(p1.x, p2.x);
+                }
+            }
+        });
         return edibleFishes.get(0);
     }
 }
