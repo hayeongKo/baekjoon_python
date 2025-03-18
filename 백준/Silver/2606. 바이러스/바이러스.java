@@ -1,44 +1,36 @@
-// 2606
-// 바이러스
-
 import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int N, V;
-    static List<List<Integer>> graph = new ArrayList<>();
+    static boolean[][] graph;
     static boolean[] visited;
-    static int cnt = -1;
-
+    static int res = 0;
+    static int N, M;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] inputs;
-
         N = Integer.parseInt(br.readLine());
-        V = Integer.parseInt(br.readLine());
-
+        M = Integer.parseInt(br.readLine());
+        graph = new boolean[N+1][N+1];
         visited = new boolean[N+1];
 
-        for(int i = 0; i < N+1; i++) {
-            graph.add(new ArrayList<>());
-        }
-
-        for(int i = 0; i < V; i++) {
+        int s, e = 0;
+        String[] inputs;
+        for(int i = 0; i < M; i++) {
             inputs = br.readLine().split(" ");
-            graph.get(Integer.parseInt(inputs[0])).add(Integer.parseInt(inputs[1]));
-            graph.get(Integer.parseInt(inputs[1])).add(Integer.parseInt(inputs[0]));
-        }
+            s = Integer.parseInt(inputs[0]);
+            e = Integer.parseInt(inputs[1]);
 
+            graph[s][e] = graph[e][s] = true;
+        }
         dfs(1);
-        System.out.print(cnt);
+        System.out.println(res);
     }
 
     public static void dfs(int v) {
         visited[v] = true;
-        cnt++;
-
-        for(Integer i: graph.get(v)) {
-            if (!visited[i]) {
+        for (int i = 1; i <= N; i++) {
+            if(graph[v][i] && !visited[i]) {
+                res++;
                 dfs(i);
             }
         }
