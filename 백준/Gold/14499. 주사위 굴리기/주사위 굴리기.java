@@ -53,9 +53,7 @@ public class Main {
     }
 
     public static void roll(int dir) {
-        for(int i = 1; i < 7; i++) {
-            tmp[i] = dice[i];
-        }
+        int[] tmp = dice.clone();
 
         if (dir == 0) { // 남
             dice[1] = tmp[2];
