@@ -3,43 +3,42 @@ import java.util.*;
 class Solution {
     boolean[] visited;
     int N;
-    List<String> answer = null;
+    List<String> ans;
     
     public String[] solution(String[][] tickets) {
-        N = tickets.length;
-        visited = new boolean[N];
-        
-        Arrays.sort(tickets, (o1, o2) -> {
-            int cmp = o1[0].compareTo(o2[0]);
-            if (cmp == 0) {
-                return o1[1].compareTo(o2[1]);
-            }
-            return o1[0].compareTo(o2[0]);
+        Arrays.sort(tickets, (a, b) -> {
+            int cmp = a[0].compareTo(b[0]);
+            if (cmp == 0) return a[1].compareTo(b[1]);
+            return cmp;
         });
         
+        N = tickets.length;
+        ans = new ArrayList<>();
+        visited = new boolean[N];
         
-        List<String> list = new ArrayList<>();
-        list.add("ICN");
-        dfs(tickets, 0, list);
+        List<String> path = new ArrayList<>();
+        path.add("ICN");
         
-        return answer.toArray(new String[0]);
+        dfs(tickets, path);
+        return ans.toArray(new String[0]);
     }
     
-    public boolean dfs(String[][] tickets, int depth, List<String> trip) {
-        if (depth == N) {
-            answer = new ArrayList<>(trip);
+    public boolean dfs(String[][] tickets, List<String> path) {
+        if (path.size() == N+1) {
+            ans = new ArrayList<>(path);
             return true;
         }
         
         for(int i = 0; i < N; i++) {
-            if (!visited[i] && trip.get(trip.size()-1).equals(tickets[i][0])) {
+            if (!visited[i] && path.get(path.size()-1).equals(tickets[i][0])) {
                 visited[i] = true;
-                trip.add(tickets[i][1]);
-                if (dfs(tickets, depth+1, trip)) return true;
-                trip.remove(trip.size()-1);
+                path.add(tickets[i][1]);
+                if (dfs(tickets, path)) return true;
+                path.remove(path.size()-1);
                 visited[i] = false;
             }
         }
+        
         return false;
     }
 }
