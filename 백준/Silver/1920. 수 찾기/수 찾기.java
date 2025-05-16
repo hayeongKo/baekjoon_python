@@ -1,55 +1,44 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
-    static int[] A;
+class Main {
+    static int N;
+    static int[] nums;
+    
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        A = new int[N];
-        TreeSet<Integer> ts = new TreeSet<>();
-
+        N = Integer.parseInt(br.readLine());
+        nums = new int[N];
+        
         String[] inputs = br.readLine().split(" ");
         for(int i = 0; i < N; i++) {
-            A[i] = Integer.parseInt(inputs[i]);
-            ts.add(A[i]);
+            nums[i] = Integer.parseInt(inputs[i]);
         }
-
-        Arrays.sort(A);
-
-        int low = 0;
-        int high = N;
-
+        Arrays.sort(nums);
+        
         int M = Integer.parseInt(br.readLine());
         inputs = br.readLine().split(" ");
-        int X;
-
-        // for(int i = 0; i < M; i++) {
-        //     X = Integer.parseInt(inputs[i]);
-        //     while(low < high-1) {
-        //         int mid = (low+high)/2;
-        //         if (A[mid] < X) {
-        //             low = mid;
-        //         } else {
-        //             high = mid;
-        //         }
-        //     }
-
-        //     System.out.println("low: " + low + " A[low]: " + A[low]);
-        //     if (A[low] == X) System.out.println(1);
-        //     else System.out.println(0);
-        // }
-
         for(int i = 0; i < M; i++) {
-            X = Integer.parseInt(inputs[i]);
-            if (ts.contains(X)) System.out.println(1);
-            else System.out.println(0);
-
-            // System.out.println("low: " + low + " A[low]: " + A[low]);
-            // if (A[low] == X) System.out.println(1);
-            // else System.out.println(0);
+            int target = Integer.parseInt(inputs[i]);
+            System.out.println(bs(target));
+        }
+    }
+    
+    public static int bs(int target) {
+        int left = 0;
+        int right = N-1;
+        
+        while(left <= right) {
+            int mid = (left+right)/2;
+            if (nums[mid] == target) {
+                return 1;
+            } else if (nums[mid] < target) {
+                left = mid+1;
+            } else {
+                right = mid-1;
+            }
         }
         
-        
+        return 0;
     }
 }
