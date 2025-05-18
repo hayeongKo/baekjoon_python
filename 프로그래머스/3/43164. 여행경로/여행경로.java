@@ -1,35 +1,36 @@
 import java.util.*;
 
 class Solution {
+    List<String> answer;
     boolean[] visited;
-    int N;
-    List<String> ans;
     
     public String[] solution(String[][] tickets) {
-        Arrays.sort(tickets, (a, b) -> {
-            int cmp = a[0].compareTo(b[0]);
-            if (cmp == 0) return a[1].compareTo(b[1]);
-            return cmp;
-        });
-        
-        N = tickets.length;
-        ans = new ArrayList<>();
-        visited = new boolean[N];
+        answer = new ArrayList<>();
+        visited = new boolean[tickets.length];
         
         List<String> path = new ArrayList<>();
         path.add("ICN");
         
+        Arrays.sort(tickets, (a, b) -> {
+            int cmp = a[0].compareTo(b[0]);
+            if (cmp == 0) {
+                return a[1].compareTo(b[1]);
+            }
+            return cmp;
+        });
+        
         dfs(tickets, path);
-        return ans.toArray(new String[0]);
+        return answer.toArray(new String[0]);
+        
     }
     
     public boolean dfs(String[][] tickets, List<String> path) {
-        if (path.size() == N+1) {
-            ans = new ArrayList<>(path);
+        if (path.size() == tickets.length+1) {
+            answer = new ArrayList<>(path);
             return true;
         }
         
-        for(int i = 0; i < N; i++) {
+        for(int i = 0; i < tickets.length; i++) {
             if (!visited[i] && path.get(path.size()-1).equals(tickets[i][0])) {
                 visited[i] = true;
                 path.add(tickets[i][1]);
