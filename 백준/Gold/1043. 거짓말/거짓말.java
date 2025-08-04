@@ -21,7 +21,7 @@ public class Main {
         }
 
         for(int i = 1; i < truthCount; i++) {
-            union(truthPeople[0], truthPeople[1]);
+            union(truthPeople[0], truthPeople[i]);
         }
 
         List<int[]> parties = new ArrayList<>();
