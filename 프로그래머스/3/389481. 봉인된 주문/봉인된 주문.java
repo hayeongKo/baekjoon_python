@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public String solution(long n, String[] bans) {
         String answer = "";
-        long num;
+        
         long[] bansNums = new long[bans.length];
         for(int i = 0; i < bans.length; i++) {
             bansNums[i] = strToNum(bans[i]); // 26진수 -> 10진수 변환
@@ -34,4 +34,6 @@ class Solution {
         }
         return str;
     }
+    
+    
 }
