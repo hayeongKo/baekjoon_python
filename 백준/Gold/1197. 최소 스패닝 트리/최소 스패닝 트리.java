@@ -64,20 +64,20 @@ public class Main {
 	}
 
 	public static boolean union(int a, int b) {
-		int ra = find(a);
-		int rb = find(b);
+		int x = find(a);
+		int y = find(b);
 		
 		// 연결 됐다면
-		if (ra == rb) {
+		if (x == y) {
 			return false;
 		} else {
 			// 연결 안됐다면
-			if (r[ra] < r[rb]) {
-				p[ra]=rb;
-				r[rb]+=ra;
+			if (r[x] < r[y]) {
+				p[x]=y;
+				r[y]+=r[x];
 			} else {
-				p[rb]=ra;
-				r[ra]+=rb;
+				p[y]=x;
+				r[x]+=r[y];
 			}
 			return true;
 		}
