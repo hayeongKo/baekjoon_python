@@ -19,10 +19,10 @@ public class Main {
 			cost[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		int ans = 0;
+		long ans = 0;
 		int step = 0;
-		int distance = 0;
-		int curCost = cost[0];
+		long distance = 0;
+		long curCost = cost[0];
 
 		while(true) {
 			if (step == N-1) {
